@@ -695,9 +695,9 @@
               <FilePath>..\..\User\flash\bsp_spi_flash.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_ds18b20.c</FileName>
+              <FileName>bsp_dht11.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\DS18B20\bsp_ds18b20.c</FilePath>
+              <FilePath>..\..\User\DHT11\bsp_dht11.c</FilePath>
             </File>
             <File>
               <FileName>bsp_SysTick.c</FileName>

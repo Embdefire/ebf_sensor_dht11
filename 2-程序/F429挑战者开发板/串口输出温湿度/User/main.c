@@ -4,7 +4,7 @@
   * @author  fire
   * @version V1.0
   * @date    2015-xx-xx
-  * @brief   DS18B20温度传感器读取。
+  * @brief   DHT11温湿度传感器读取。
   ******************************************************************************
   * @attention
   *
@@ -16,11 +16,12 @@
   */
   
 #include "stm32f4xx.h"
-#include "usart/bsp_debug_usart.h"
+#include "./usart/bsp_debug_usart.h"
 #include "systick/bsp_SysTick.h"
-#include "DS18B20/bsp_ds18b20.h"
+#include "DHT11/bsp_dht11.h"
 
-float temperature;
+DHT11_Data_TypeDef DHT11_Data;
+
 /**
   * @brief  主函数
   * @param  无
@@ -28,39 +29,29 @@ float temperature;
   */
 int main(void)
 {	
-	uint8_t uc,DS18B20Id[8];
-	
   /*初始化USART，配置模式为 115200 8-N-1*/
   Debug_USART_Config();
-  printf("\r\n***野火F429至尊版 DS18B20 温度传感器实验***\n");
-	
+ 
 	/* 系统定时器初始化 */
 	SysTick_Init();
 	
-	if(DS18B20_Init()==0)
-	{
-		printf("DS18B20初始化成功\n");
-	}
-	else
-	{
-		printf("DS18B20初始化失败\n");
-		printf("请将传感器正确插入到插槽内\n");
-		/* 停机 */
-		while(1)
-		{}			
-	}		
-	DS18B20_ReadId ( DS18B20Id  );           // 读取 DS18B20 的序列号
+	/* DHT11初始化 */
+	DHT11_GPIO_Config();
 	
-	printf("\r\nDS18B20的序列号是： 0x");
-
-	for ( uc = 0; uc < 8; uc++ )             // 打印 DS18B20 的序列号
-    printf ( "%.2x", DS18B20Id[uc]);
-	printf("\n");
+	printf("\r\n***野火F429至尊版 dht11 温湿度传感器实验***\r\n");
 	
   while(1)
 	{
-		temperature=DS18B20_Get_Temp();
-		printf("DS18B20读取到的温度为：%0.3f\n",temperature);
+		/*调用DHT11_Read_TempAndHumidity读取温湿度，若成功则输出该信息*/
+		if( Read_DHT11 ( & DHT11_Data ) == SUCCESS)
+		{
+			printf("\r\n读取DHT11成功!\r\n\r\n湿度为%d.%d ％RH ，温度为 %d.%d℃ \r\n",\
+			DHT11_Data.humi_int,DHT11_Data.humi_deci,DHT11_Data.temp_int,DHT11_Data.temp_deci);
+		}		
+		else
+		{
+		  printf("Read DHT11 ERROR!\r\n");
+		}
     Delay_ms(1000);
 	} 
 
