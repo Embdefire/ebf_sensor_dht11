@@ -3,16 +3,36 @@
 
 #include "stm32f10x.h"
 
+#define USE_DWT_DELAY			1	/* 使用dwt内核精确延时 */
 
-#define Delay_ms(ms)  	CPU_TS_Tmr_Delay_MS(ms)
-#define Delay_us(us)  	CPU_TS_Tmr_Delay_US(us)
+#if USE_DWT_DELAY
+#define USE_TICK_DELAY		0		/* 不使用SysTick延时 */
+#else
+#define USE_TICK_DELAY		1		/* 使用SysTick延时 */
+#endif
 
-/* 最大延时 60s=2的32次方/72000000 */
-#define Delay_s(s)  	  CPU_TS_Tmr_Delay_S(s)
+
+/*简单任务管理*/
+#define TASK_ENABLE 0
+#define NumOfTask 3
+
+
+#if USE_DWT_DELAY
+
+//#define Delay_ms(ms)  	CPU_TS_Tmr_Delay_MS(ms)
+//#define Delay_us(us)  	CPU_TS_Tmr_Delay_US(us)
+///* 最大延时 60s=2的32次方/72000000 */
+//#define Delay_s(s)  	  CPU_TS_Tmr_Delay_S(s)
 
 /* 获取内核时钟频率 */
 #define GET_CPU_ClkFreq()       (SystemCoreClock)
 #define SysClockFreq            (SystemCoreClock)
+/* 为方便使用，在延时函数内部调用CPU_TS_TmrInit函数初始化时间戳寄存器，
+   这样每次调用函数都会初始化一遍。
+   把本宏值设置为0，然后在main函数刚运行时调用CPU_TS_TmrInit可避免每次都初始化 */  
+
+#define CPU_TS_INIT_IN_DELAY_FUNCTION   1
+
 
 /*******************************************************************************
  * 							函数声明
@@ -26,5 +46,6 @@ void CPU_TS_Tmr_Delay_US(uint32_t us);
 #define CPU_TS_Tmr_Delay_MS(ms)     CPU_TS_Tmr_Delay_US(ms*1000)
 #define CPU_TS_Tmr_Delay_S(s)       CPU_TS_Tmr_Delay_MS(s*1000)
 
+#endif
 
 #endif /* __CORE_DELAY_H */

@@ -1,16 +1,16 @@
 /**
   ******************************************************************************
-  * @file    FMC_SDRAM/stm32f4xx_it.c 
+  * @file    Project/STM32F4xx_StdPeriph_Templates/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    11-November-2013
+  * @version V1.5.0
+  * @date    06-March-2015
   * @brief   Main Interrupt Service Routines.
-  *         This file provides template for all exceptions handler and
-  *         peripherals interrupt service routine.
+  *          This file provides template for all exceptions handler and 
+  *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2013 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -29,7 +29,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_it.h"
-#include "./led/bsp_led.h"
 
 /** @addtogroup STM32F429I_DISCOVERY_Examples
   * @{
@@ -68,9 +67,7 @@ void HardFault_Handler(void)
 {
   /* Go to infinite loop when Hard Fault exception occurs */
   while (1)
-  {
-		LED_RED;
-	}
+  {}
 }
 
 /**
@@ -133,6 +130,9 @@ void SVC_Handler(void)
 void PendSV_Handler(void)
 {}
 
+	
+extern void TimingDelay_Decrement(void);
+
 /**
   * @brief  This function handles SysTick Handler.
   * @param  None
@@ -140,6 +140,7 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
+  TimingDelay_Decrement();
 }
 
 /******************************************************************************/

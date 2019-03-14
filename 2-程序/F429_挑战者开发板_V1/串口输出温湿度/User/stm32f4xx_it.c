@@ -140,6 +140,7 @@ extern void TimingDelay_Decrement(void);
   */
 void SysTick_Handler(void)
 {
+  TimingDelay_Decrement();
 }
 
 /******************************************************************************/

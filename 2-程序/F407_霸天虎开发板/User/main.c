@@ -17,7 +17,7 @@
   
 #include "stm32f4xx.h"
 #include "./usart/bsp_debug_usart.h"
-#include "./dwt_delay/core_delay.h" 
+#include "./systick/bsp_SysTick.h"
 #include "DHT11/bsp_dht11.h"
 
 DHT11_Data_TypeDef DHT11_Data;
@@ -32,8 +32,8 @@ int main(void)
   /*初始化USART，配置模式为 115200 8-N-1*/
   Debug_USART_Config();
  
-	/* DWT 初始化 */
-	CPU_TS_TmrInit();
+	/* 初始化系统定时器 */
+	SysTick_Init();
 	
 	/* DHT11初始化 */
 	DHT11_GPIO_Config();

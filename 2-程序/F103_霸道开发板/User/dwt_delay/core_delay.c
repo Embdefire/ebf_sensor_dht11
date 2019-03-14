@@ -27,6 +27,9 @@
  2、使能CYCCNT寄存器之前，先清0
  3、使能CYCCNT寄存器，这个由DWT_CTRL(代码上宏定义为DWT_CR)的位0控制，写1使能
  */
+ 
+#if USE_DWT_DELAY
+
 
 #define  DWT_CR      *(__IO uint32_t *)0xE0001000
 #define  DWT_CYCCNT  *(__IO uint32_t *)0xE0001004
@@ -65,6 +68,17 @@ uint32_t CPU_TS_TmrRd(void)
   return ((uint32_t)DWT_CYCCNT);
 }
 
+///**
+//  * @brief  读取当前时间戳
+//  * @param  无
+//  * @retval 当前时间戳，即DWT_CYCCNT寄存器的值
+//	* 				此处给HAL库替换HAL_GetTick函数，用于os
+//  */
+//uint32_t HAL_GetTick(void)
+//{        
+//  return ((uint32_t)DWT_CYCCNT*1000/SysClockFreq);
+//}
+
 /**
   * @brief  采用CPU的内部计数实现精确延时，32位计数器
   * @param  us : 延迟长度，单位1 us
@@ -77,6 +91,12 @@ void CPU_TS_Tmr_Delay_US(__IO uint32_t us)
 {
   uint32_t ticks;
   uint32_t told,tnow,tcnt=0;
+
+  /* 在函数内部初始化时间戳寄存器， */  
+#if (CPU_TS_INIT_IN_DELAY_FUNCTION)  
+  /* 初始化时间戳并清零 */
+  CPU_TS_TmrInit();
+#endif
   
   ticks = us * (GET_CPU_ClkFreq() / 1000000);  /* 需要的节拍数 */      
   tcnt = 0;
@@ -106,5 +126,6 @@ void CPU_TS_Tmr_Delay_US(__IO uint32_t us)
   }
 }
 
+#endif
 
 /*********************************************END OF FILE**********************/
