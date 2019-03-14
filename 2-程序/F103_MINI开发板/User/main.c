@@ -33,7 +33,7 @@ int main(void)
 	DHT11_Data_TypeDef DHT11_Data;
 	
 	
-	/* 初始化 DWT */
+	/* 初始化系统定时器 */
 	SysTick_Init();
 
 	USART_Config();//初始化串口1

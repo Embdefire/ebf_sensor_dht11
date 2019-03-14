@@ -28,6 +28,8 @@ static void                           DHT11_Mode_IPU                          ( 
 static void                           DHT11_Mode_Out_PP                       ( void );
 static uint8_t                        DHT11_ReadByte                          ( void );
 
+/* 可以在下面的宏定义中把后面的延时函数替换换SysTick的延时函数，就是想用那个就换成那个的 */
+
 #define DHT11_DELAY_US(us)  CPU_TS_Tmr_Delay_US(us)
 #define DHT11_DELAY_MS(ms)  CPU_TS_Tmr_Delay_MS(ms)
 
