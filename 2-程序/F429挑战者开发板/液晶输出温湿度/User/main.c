@@ -20,7 +20,7 @@
 #include "./usart/bsp_debug_usart.h"
 #include "./sdram/bsp_sdram.h"
 #include "./lcd/bsp_lcd.h"
-#include "systick/bsp_SysTick.h"
+#include "./dwt_delay/core_delay.h" 
 #include "DHT11/bsp_dht11.h"
 #include <string.h>
 
@@ -62,8 +62,8 @@ int main(void)
 	/*经过LCD_SetLayer(LCD_FOREGROUND_LAYER)函数后，
 	以下液晶操作都在前景层刷新，除非重新调用过LCD_SetLayer函数设置背景层*/
 		
-	/* 系统定时器初始化 */
-	SysTick_Init();  
+	/* DWT 初始化 */
+	CPU_TS_TmrInit();  
 	/* DHT11初始化 */
 	DHT11_GPIO_Config();
 

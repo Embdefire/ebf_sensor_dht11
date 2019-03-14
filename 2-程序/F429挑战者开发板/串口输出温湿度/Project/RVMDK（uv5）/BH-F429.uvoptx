@@ -768,8 +768,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\User\systick\bsp_SysTick.c</PathWithFileName>
-      <FilenameWithoutPath>bsp_SysTick.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\User\dwt_delay\core_delay.c</PathWithFileName>
+      <FilenameWithoutPath>core_delay.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

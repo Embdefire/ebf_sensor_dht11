@@ -16,7 +16,7 @@
   */
   
 #include "stm32f10x.h"
-#include "./systick/bsp_SysTick.h"
+#include "./dwt_delay/core_delay.h" 
 #include "./dht11/bsp_dht11.h"
 #include "./usart/bsp_usart.h"
 
@@ -32,8 +32,8 @@ int main(void)
 	DHT11_Data_TypeDef DHT11_Data;
 	
 	
-	/* 配置SysTick 为1us中断一次 */
-	SysTick_Init();
+	/* 配置 DWT */
+	CPU_TS_TmrInit();
 
 	USART_Config();//初始化串口1
 	printf("\r\n***野火STM32 dht11 温湿度传感器实验***\r\n");
