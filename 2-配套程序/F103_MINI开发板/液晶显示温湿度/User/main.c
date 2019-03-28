@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火 指南者 STM32 开发板 
+  * 实验平台:野火 霸道 STM32 开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -46,13 +46,13 @@ int main(void)
   
 	/*初始化DTT11的引脚*/
 	DHT11_Init ();
+  ILI9341_DispStringLine_EN(LINE(0),"YH DHT11 test");
 	
 	while(1)
 	{	
 			/*调用DHT11_Read_TempAndHumidity读取温湿度，若成功则输出该信息*/
 			if( DHT11_Read_TempAndHumidity ( & DHT11_Data ) == SUCCESS)
 			{
-        ILI9341_DispStringLine_EN(LINE(0),"YH DHT11 test");
         
         /* 显示温度 */
         sprintf(dispBuff,"Temperature : %d.%d ",DHT11_Data.temp_int, DHT11_Data.temp_deci);
