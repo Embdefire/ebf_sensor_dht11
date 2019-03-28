@@ -98,7 +98,7 @@ int main(void)
       LCD_DisplayStringLine_EN_CH(LINE(2),(uint8_t* )"DHT11 initialization failed!");
       LCD_DisplayStringLine_EN_CH(LINE(3),(uint8_t* )"Please check the connection!");	
 		}
-    Delay_ms(1000);
+    Delay_ms(2000);
 	} 
 
 }

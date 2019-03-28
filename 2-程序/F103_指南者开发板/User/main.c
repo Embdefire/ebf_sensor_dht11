@@ -54,7 +54,7 @@ int main(void)
 				printf("Read DHT11 ERROR!\r\n");
 			}
 			
-		 Delay_ms(1000);
+		 Delay_ms(2000);
 	}
 
 	
