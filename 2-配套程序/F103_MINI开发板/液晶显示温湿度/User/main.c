@@ -60,7 +60,7 @@ int main(void)
         ILI9341_DispStringLine_EN(LINE(1),dispBuff);
         
         /* 显示湿度 */
-        sprintf(dispBuff,"Temperature : %d.%d%% ",DHT11_Data.humi_int, DHT11_Data.humi_deci);
+        sprintf(dispBuff,"Humidity : %d.%d%% ",DHT11_Data.humi_int, DHT11_Data.humi_deci);
         LCD_ClearLine(LINE(2));	/* 清除单行文字 */
         ILI9341_DispStringLine_EN(LINE(2),dispBuff);
 			}			

@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火 指南者 STM32 开发板 
+  * 实验平台:野火 霸道 STM32 开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -21,6 +21,7 @@
 #include "./usart/bsp_usart.h"
 #include "./lcd/bsp_ili9341_lcd.h"
 
+
 /**
   * @brief  主函数
   * @param  无  
@@ -28,7 +29,7 @@
   */
 int main(void)
 {
-  char dispBuff[100];
+	char dispBuff[100];
   
 	DHT11_Data_TypeDef DHT11_Data;
 
@@ -74,7 +75,5 @@ int main(void)
 			
 		 Delay_ms(2000);
 	}
-
-	
 }
 /*********************************************END OF FILE**********************/
