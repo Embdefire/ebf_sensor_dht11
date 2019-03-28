@@ -19,8 +19,7 @@
 #include "./systick/bsp_SysTick.h"
 #include "./dht11/bsp_dht11.h"
 #include "./usart/bsp_usart.h"
-
-
+#include "./lcd/bsp_ili9341_lcd.h"
 
 /**
   * @brief  主函数
@@ -29,15 +28,22 @@
   */
 int main(void)
 {
+  char dispBuff[100];
+  
 	DHT11_Data_TypeDef DHT11_Data;
-	
-	
+
 	/* 初始化系统定时器 */
 	SysTick_Init();
+  
+  //LCD 初始化
+	ILI9341_Init (); 
+ //其中0、3、5、6 模式适合从左至右显示文字，
+ //不推荐使用其它模式显示文字	其它模式显示文字会有镜像效果			
+ //其中 6 模式为大部分液晶例程的默认显示方向  
+	ILI9341_GramScan ( 6 );
 
-	USART_Config();//初始化串口1
-	printf("\r\n***野火STM32 dht11 温湿度传感器实验***\r\n");
-
+  ILI9341_Clear(0,0,LCD_X_LENGTH,LCD_Y_LENGTH);	/* 清屏，显示全黑 */
+  
 	/*初始化DTT11的引脚*/
 	DHT11_Init ();
 	
@@ -46,12 +52,24 @@ int main(void)
 			/*调用DHT11_Read_TempAndHumidity读取温湿度，若成功则输出该信息*/
 			if( DHT11_Read_TempAndHumidity ( & DHT11_Data ) == SUCCESS)
 			{
-				printf("\r\n读取DHT11成功!\r\n\r\n湿度为%d.%d ％RH ，温度为 %d.%d℃ \r\n",\
-				DHT11_Data.humi_int,DHT11_Data.humi_deci,DHT11_Data.temp_int,DHT11_Data.temp_deci);
+        ILI9341_DispStringLine_EN(LINE(0),"YH DHT11 test");
+        
+        /* 显示温度 */
+        sprintf(dispBuff,"Temperature : %d.%d ",DHT11_Data.temp_int, DHT11_Data.temp_deci);
+        LCD_ClearLine(LINE(1));	/* 清除单行文字 */
+        ILI9341_DispStringLine_EN(LINE(1),dispBuff);
+        
+        /* 显示湿度 */
+        sprintf(dispBuff,"Temperature : %d.%d ",DHT11_Data.humi_int, DHT11_Data.humi_deci);
+        LCD_ClearLine(LINE(2));	/* 清除单行文字 */
+        ILI9341_DispStringLine_EN(LINE(2),dispBuff);
 			}			
 			else
 			{
-				printf("Read DHT11 ERROR!\r\n");
+        LCD_ClearLine(LINE(1));	/* 清除单行文字 */
+        LCD_ClearLine(LINE(2));	/* 清除单行文字 */
+				ILI9341_DispStringLine_EN(LINE(1),"Read DHT11 ERROR");
+        ILI9341_DispStringLine_EN(LINE(2),"Read DHT11 ERROR");
 			}
 			
 		 Delay_ms(2000);
