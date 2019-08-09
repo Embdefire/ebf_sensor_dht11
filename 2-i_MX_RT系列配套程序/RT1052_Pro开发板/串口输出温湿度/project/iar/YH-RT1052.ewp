@@ -7309,6 +7309,21 @@
     <group>
         <name>user</name>
         <file>
+            <name>$PROJ_DIR$\..\..\user\bsp\dht11\bsp_dht11.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\user\bsp\nvic\bsp_nvic .c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\user\bsp\systick\bsp_systick.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\user\bsp\uart\bsp_uart.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\user\bsp\delay\core_delay.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\user\main.c</name>
         </file>
     </group>
