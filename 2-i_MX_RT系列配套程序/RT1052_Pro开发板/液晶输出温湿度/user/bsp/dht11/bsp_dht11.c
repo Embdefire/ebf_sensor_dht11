@@ -98,7 +98,7 @@ static void DHT11_Mode_Out_PP(void)
 static void DHT11_IOMUXC_MUX_Config(void)
 { 
   /* 设置引脚的复用模式为GPIO，不使用SION功能 */
-  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_09_GPIO1_IO09, 0U);
+  IOMUXC_SetPinMux(DHT11_IOMUXC, 0U);
 }
 
 /**
@@ -109,7 +109,7 @@ static void DHT11_IOMUXC_MUX_Config(void)
 static void DHT11_IOMUXC_PAD_Config(void)
 {
   /* 开发板的DHT11接口 */    
-  IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B0_09_GPIO1_IO09, DHT11_PAD_CONFIG_DATA);  
+  IOMUXC_SetPinConfig(DHT11_IOMUXC, DHT11_PAD_CONFIG_DATA);  
 }
 
 
