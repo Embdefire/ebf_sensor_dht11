@@ -8,14 +8,14 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火  STM32H743 挑战者开发板  
+  * 实验平台:野火  STM32 H743 Pro开发板  
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
   ******************************************************************************
   */
 	
-#include "./dht11/bsp_dht11.h"
+#include "./dht11/bsp_dht11.h "
 #include "./delay/core_delay.h" 
 /*
  * 函数名：DHT11_GPIO_Config
